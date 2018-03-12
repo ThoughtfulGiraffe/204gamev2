@@ -18,6 +18,9 @@ Engine::~Engine() {
 bool Engine::Init() {
 	window = new sf::RenderWindow(sf::VideoMode(videoSize.x, videoSize.y, 32), "Doki Doki Sheep Club");
     camera = new Camera(videoSize.x, videoSize.y, 4.0f);
+    sf::Texture playerModel;
+    playerModel.loadFromFile()
+    player = new Player(camera->GetPosition.x, camera->getPosition.y);
 
 	mouseDown = false;
 
@@ -38,16 +41,16 @@ void Engine::ProcessInput() {
 		if(evt.type == sf::Event::Closed)
 			window->close();
 
-		/*if((evt.type == sf::Event::MouseButtonPressed) && (mouseDown == false))
-		{
+		if((evt.type == sf::Event::MouseButtonPressed) && (mouseDown == false)) {
 			int x = camera->GetPosition().x + evt.mouseButton.x;
+			std::cout << evt.mouseButton.x;
 			int y = camera->GetPosition().y + evt.mouseButton.y;
 			camera->GoToCenter(x, y);
 			mouseDown = true;
 		}
 		if(evt.type == sf::Event::MouseButtonReleased)
-			mouseDown = false;*/
-        if(evt.type == sf::Event::KeyPressed) {
+			mouseDown = false;
+        /*if(evt.type == sf::Event::KeyPressed) {
             if (evt.key.code == sf::Keyboard::Up) {
                 int x = camera->GetPosition().x;
                 int y = camera->GetPosition().y;
@@ -65,7 +68,7 @@ void Engine::ProcessInput() {
                 int y = camera->GetPosition().y;
                 camera->GoToCenter(x, y);
             }
-        }
+        }*/
 	}
 }
 

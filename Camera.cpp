@@ -52,18 +52,6 @@ void Camera::GoToCenter(int x, int y) {
 	target.y = (float)y;
 }
 
-/*void Camera::GoToCenterX(int x) {
-	x = x - (size.x / 2);
-
-	target.x = (float)x;
-}
-
-void Camera::GoToCenterY(int y) {
-	y = y - (size.y / 2);
-
-	target.y = (float)y;
-}*/
-
 //Moves towards target position over time
 void Camera::Update() {
 	//X distance to target, Y distance to target, and Euclidean distance

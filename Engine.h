@@ -20,6 +20,9 @@ class Engine {
         //Camera
         Camera* camera;
 
+        //Player
+        Player* player;
+
         //Current Level
         Level* currentLevel;
 
