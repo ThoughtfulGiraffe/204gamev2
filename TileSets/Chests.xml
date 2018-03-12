@@ -1,0 +1,3 @@
+<tileset name="Chests" tilewidth="32" tileheight="32" tilecount="2" columns="1">
+ <image source="PNGTiles/Treasure Chest - closed to open.png" width="32" height="64"/>
+</tileset>
