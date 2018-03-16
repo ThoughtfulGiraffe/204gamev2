@@ -1,22 +1,20 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-class Player:
-public:
-    Player(int posX, int posY, sf::Texture character);
-    ~Player();
+class Player::public MovableEntity
+{
+    public:
+        Player(int pX, int pY, sf::Texture character);
+        Player(int pX, int pY, sf::Texture character, string n, double mHealth, double bDamage);
+        Player(Player p);
+        void attack(MovableEntity entityToAttack);
+        void Move();
+        void changeWeapon(Weapon w);
+        Weapon getCurrentWeapon();
+    private:
+        Weapon currentWeapon;
+};
 
-    void Move();
-    void Draw();
 
-    float getXVelocity();
-    float getYVelocity();
-
-private:
-    int playerPosX;
-    int playerPosY;
-    float _xvelocity;
-    float _yvelocity;
-    float _maxVelocity;
 
 #endif // PLAYER_H_INCLUDED
