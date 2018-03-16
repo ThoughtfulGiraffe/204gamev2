@@ -4,9 +4,9 @@ Player::Player(int pX, int pY, sf::Texture character)
 {
     posX = pX;
     posY = pY;
-    name = "An enemy!!! Grr!!! Argh!!!";
-    maxHealth = currentHealth = 1.0;
-    baseDamage = 1.0;
+    name = "The player! Our knight in shining armor!";
+    maxHealth = currentHealth = 10.0;
+    baseDamage = 2.0;
     currentWeapon = new Weapon();
 }
 
