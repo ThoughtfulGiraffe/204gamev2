@@ -7,7 +7,7 @@
 #include "Tile.h"
 #include "Camera.h"
 #include "Level.h"
-
+#include "MainMenu.h"
 
 class Engine {
     private:
@@ -19,9 +19,6 @@ class Engine {
 
         //Camera
         Camera* camera;
-
-        //Player
-        Player* player;
 
         //Current Level
         Level* currentLevel;
