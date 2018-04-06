@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "Camera.h"
 #include "Tile.h"
+
 #include <iostream>
 
 #include <SFML\Graphics.hpp>
@@ -16,19 +17,33 @@ Engine::~Engine() {
 }
 
 bool Engine::Init() {
-	window = new sf::RenderWindow(sf::VideoMode(videoSize.x, videoSize.y, 32), "Doki Doki Sheep Club");
+
+	window = new sf::RenderWindow(sf::VideoMode(videoSize.x, videoSize.y, 32), "Void Murder");
     camera = new Camera(videoSize.x, videoSize.y, 4.0f);
-    sf::Texture playerModel;
-    playerModel.loadFromFile()
-    player = new Player(camera->GetPosition.x, camera->getPosition.y);
 
 	mouseDown = false;
 
+//this loads the level
 	if(!window)
 		return false;
+//load main menu
 
-    currentLevel = new Level();
-	currentLevel->LoadLevel("LevelOne.xml", imageManager);
+MainMenu mainMenu;
+MainMenu::MenuResult result = mainMenu.Show(window);
+    switch(result){
+        case MainMenu::Exit:
+            exit(0);
+            break;
+        case MainMenu::Play:
+            //Should load the level when press play button
+            currentLevel = new Level();
+            currentLevel->LoadLevel("LevelOne.xml", imageManager);
+        break;
+        default:
+            break;
+            }
+    //stuffs below go in if statement
+
 
 	return true;
 }
@@ -41,16 +56,16 @@ void Engine::ProcessInput() {
 		if(evt.type == sf::Event::Closed)
 			window->close();
 
-		if((evt.type == sf::Event::MouseButtonPressed) && (mouseDown == false)) {
+		/*if((evt.type == sf::Event::MouseButtonPressed) && (mouseDown == false))
+		{
 			int x = camera->GetPosition().x + evt.mouseButton.x;
-			std::cout << evt.mouseButton.x;
 			int y = camera->GetPosition().y + evt.mouseButton.y;
 			camera->GoToCenter(x, y);
 			mouseDown = true;
 		}
 		if(evt.type == sf::Event::MouseButtonReleased)
-			mouseDown = false;
-        /*if(evt.type == sf::Event::KeyPressed) {
+			mouseDown = false;*/
+        if(evt.type == sf::Event::KeyPressed) {
             if (evt.key.code == sf::Keyboard::Up) {
                 int x = camera->GetPosition().x;
                 int y = camera->GetPosition().y;
@@ -68,7 +83,7 @@ void Engine::ProcessInput() {
                 int y = camera->GetPosition().y;
                 camera->GoToCenter(x, y);
             }
-        }*/
+        }
 	}
 }
 
@@ -108,6 +123,8 @@ void Engine::RenderFrame() {
 	camOffsetX = camera->GetTileOffset(tileSize).x;
 	camOffsetY = camera->GetTileOffset(tileSize).y;
 
+	//put code here to launch the menu...
+
 	//Loop through and draw each tile
 	//Keeping track of two variables in each loop. How many tiles
 	//are drawn (x and y), and which tile on the map are drawing (tileX
@@ -124,7 +141,6 @@ void Engine::RenderFrame() {
                 Tile* backgroundTile = new Tile(imageManager.GetImage(999));
                 backgroundTile->Draw((x * tileSize) - camOffsetX, (y * tileSize) - camOffsetY, window);
 			}
-
 		}
 	}
 	window->display();
